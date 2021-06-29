@@ -15,7 +15,7 @@ while True:
         else:
             value = comm.irecv(number, source=rank-1)
             if rank < size-1:
-                comm.isend(number, dest=rank + 1)
+                comm.isend(value, dest=rank + 1)
         print("Process %d got %d\n" % (rank, number))
 
 
