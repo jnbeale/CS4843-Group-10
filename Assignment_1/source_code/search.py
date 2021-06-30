@@ -5,6 +5,7 @@ rank = comm.Get_rank()
 size = comm.Get_size()
 
 f = open("data.txt", "r").read().split("\n")
+req = comm.irecv(source=MPI.ANY_SOURCE, tag=11)
 if rank == 0:
     for i in f[0:10000]:
         if i == "11":
