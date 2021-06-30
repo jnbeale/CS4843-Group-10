@@ -11,7 +11,7 @@ if rank == 0:
         if i == "11":
             for r in range(1,size):
                 comm.isend(0, dest=r, tag=11)
-            print("I am process %d and I found 11" % (i, rank))
+            print("I am process %d and I found 11" % (rank))
             myfound = 1
       if(req.Test() == True):
         print("Master process has received message")
@@ -20,7 +20,7 @@ if rank == 1:
         if i == "11":
             for r in range(1,size):
                 comm.isend(0, dest=r, tag=11)
-            print("I am process %d and I found 11" % (i, rank))
+            print("I am process %d and I found 11" % (rank))
     if (req.Test() == True):
       print("Process 1 has received message")
 if rank == 2:
@@ -28,7 +28,7 @@ if rank == 2:
         if i == "11":
             for r in range(1,size):
                 comm.isend(0, dest=r, tag=11)
-            print("I am process %d and I found 11" %(i, rank))
+            print("I am process %d and I found 11" %(rank))
     if (req.Test() == True):
       print("Process 2 has received message")
 if rank == 3:
@@ -36,7 +36,7 @@ if rank == 3:
         if i == "11":
             for r in range(1,size):
                 comm.isend(0, dest=r, tag=11)
-            print("I am process %d and I found 11" % (i, rank))
+            print("I am process %d and I found 11" % (rank))
     if (req.Test() == True):
        print("Process 3 has received message")
 
