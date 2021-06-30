@@ -9,7 +9,7 @@ while True:
     if number < 0:
         break
     #num.append(numbers)
-    while number >= 0:
+    else:
         if rank == 0:
             comm.isend(number, dest=rank+1)
         else:
