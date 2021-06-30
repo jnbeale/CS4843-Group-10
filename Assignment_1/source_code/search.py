@@ -1,43 +1,41 @@
 from mpi4py import MPI
-#import numpy as np
+
+comm = MPI.COMM_WORLD
+rank = comm.Get_rank()
+size = comm.Get_size()
+
 f = open("data.txt", "r").read().split("\n")
 if rank == 0:
-    #f = open("data.txt", "r").read().split("\n")
-    #print(f)
-    #nvalues = 40000/size
-    #i = rank*nvalues
-    #print(i)
-    for i in arr[0:10000]:
+    for i in f[0:10000]:
         if i == "11":
             for r in range(1,size):
                 comm.isend(0, dest=r, tag=11)
             print("I am process %d and I found 11" % (i, rank))
             myfound = 1
-
-        if(req.Test() == True):
-                print("received message")
+      if(req.Test() == True):
+        print("Master process has received message")
 if rank == 1:
-    for i in arr[10000:20000]:
+    for i in f[10000:20000]:
         if i == "11":
             for r in range(1,size):
                 comm.isend(0, dest=r, tag=11)
             print("I am process %d and I found 11" % (i, rank))
-        if (req.Test() == True):
-            print("received message")
+    if (req.Test() == True):
+      print("Process 1 has received message")
 if rank == 2:
-    for i in arr[20000:30000]:
+    for i in f[20000:30000]:
         if i == "11":
             for r in range(1,size):
                 comm.isend(0, dest=r, tag=11)
             print("I am process %d and I found 11" %(i, rank))
-        if (req.Test() == True):
-            print("received message")
+    if (req.Test() == True):
+      print("Process 2 has received message")
 if rank == 3:
-    for i in arr[30000:40000]:
+    for i in f[30000:40000]:
         if i == "11":
             for r in range(1,size):
                 comm.isend(0, dest=r, tag=11)
             print("I am process %d and I found 11" % (i, rank))
-        if (req.Test() == True):
-            print("received message")
+    if (req.Test() == True):
+       print("Process 3 has received message")
 
