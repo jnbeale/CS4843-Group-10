@@ -22,7 +22,7 @@ while True:
 user_number = 0
 while user_number >= 0:
     if rank == 0:
-        print("Enter a number?")
+        print("Enter a positive number?")
         user_number = int(input())
         comm.send(user_number, dest=rank + 1)
     else:
