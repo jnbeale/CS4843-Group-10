@@ -4,7 +4,8 @@ comm = MPI.COMM_WORLD
 rank = comm.Get_rank()
 size = comm.Get_size()
 #1 got error
-number = int(input('Enter a positive number, negative to stop: '))
+number = 10
+#number = int(input('Enter a positive number, negative to stop: '))
 while True:
     if number < 0:
         break
@@ -30,4 +31,3 @@ while user_number >= 0:
         if rank < size - 1:
             comm.send(user_number, dest=rank + 1)
     print("Process %d got %d\n" % (rank, user_number))
-

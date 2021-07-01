@@ -13,8 +13,8 @@ if rank == 0:
                 comm.isend(0, dest=r, tag=11)
             print("I am process %d and I found 11" % (rank))
             myfound = 1
-      if(req.Test() == True):
-        print("Master process has received message")
+    if(req.Test() == True):
+      print("Master process has received message")
 if rank == 1:
     for i in f[10000:20000]:
         if i == "11":
@@ -37,6 +37,5 @@ if rank == 3:
             for r in range(1,size):
                 comm.isend(0, dest=r, tag=11)
             print("I am process %d and I found 11" % (rank))
-    if (req.Test() == True):
-       print("Process 3 has received message")
-
+    if(req.Test() == True):
+      print("Process 3 has received message")
