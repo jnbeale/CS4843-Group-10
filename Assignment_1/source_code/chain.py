@@ -31,3 +31,29 @@ while user_number >= 0:
         if rank < size - 1:
             comm.send(user_number, dest=rank + 1)
     print("Process %d got %d\n" % (rank, user_number))
+
+    #3
+#number = 0
+number = int(input('Enter a number: '))
+while number >= 0:
+    if rank == 0:
+        print("Process %d got %d\n" % (rank, number))
+        comm.send(value, dest=rank + 1)
+    if rank > 0:
+        comm.recv(value, source=rank - 1)
+        print("Process %d got %d\n" % (rank, value))
+        comm.send(value, dest=rank + 1)
+        print("Process %d got %d\n" % (rank, value))
+    number = int(input('Enter a number: '))
+
+#4
+number = int(input('Enter a number: '))
+while number >= 0:
+    if rank == 0:
+        comm.send(value, dest=rank + 1)
+    if rank > 0:
+        comm.recv(value, source=rank - 1)
+        comm.send(value, dest=rank + 1)
+
+    print("Process %d got %d\n" % (rank, value))
+    number = int(input('Enter a number: '))
