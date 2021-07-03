@@ -38,22 +38,22 @@ number = int(input('Enter a number: '))
 while number >= 0:
     if rank == 0:
         print("Process %d got %d\n" % (rank, number))
-        comm.send(value, dest=rank + 1)
+        comm.send(number, dest=rank + 1)
     if rank > 0:
-        comm.recv(value, source=rank - 1)
-        print("Process %d got %d\n" % (rank, value))
+        comm.recv(number, source=rank - 1)
+        print("Process %d got %d\n" % (rank, number))
         comm.send(value, dest=rank + 1)
-        print("Process %d got %d\n" % (rank, value))
+        print("Process %d got %d\n" % (rank, number))
     number = int(input('Enter a number: '))
 
 #4
 number = int(input('Enter a number: '))
 while number >= 0:
     if rank == 0:
-        comm.send(value, dest=rank + 1)
+        comm.send(number, dest=rank + 1)
     if rank > 0:
-        comm.recv(value, source=rank - 1)
-        comm.send(value, dest=rank + 1)
+        comm.recv(number, source=rank - 1)
+        comm.send(number, dest=rank + 1)
 
-    print("Process %d got %d\n" % (rank, value))
+    print("Process %d got %d\n" % (rank, number))
     number = int(input('Enter a number: '))
