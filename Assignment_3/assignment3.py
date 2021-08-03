@@ -25,3 +25,7 @@ rdd = rdd.map(lamda x: (x[1], x[0])).sortByKey(False).take(3)
 #print out
 print("Top 3 crime types that were reported in the month of July are:")
 
+#How many crimes of type DANGEROUS WEAPONS were reported in the month of July ?
+rdd_count = rdd.filter(rdd.RPT_DT == "july" and rdd.OFNS_DESC == "DANGEROUS WEAPONS")
+rdd_count.count()
+
