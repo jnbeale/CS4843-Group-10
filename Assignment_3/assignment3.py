@@ -12,9 +12,11 @@ rdd = sc.textFile("hdfs://ipaddr:54310/hw2-input/")
 rdd = rdd.mapPartitions(lambda x: reader(x))
 
 # using filter with column condition (crimes in month of july)
-rdd = rdd.filter(rdd.RPT_DT == "july")
+for i in rdd.select("OFNS_DESC"):
+    rdd = rdd.filter(rdd.RPT_DT == "july")
 
 # perform sum all the int values for each unique keys
+
 rdd = rdd.reduceByKey(lamda x,y: x+y)
 
 #function grab top 3
