@@ -1,0 +1,30 @@
+from csv import reader
+from pyspark.mllib.clustering import KMeans
+#import KMeans from pyspark
+from pyspark import SparkContext 
+import numpy as np
+
+sc = SparkContext(appName="MySparkProg")
+sc.setLogLevel("ERROR")
+rdd = sc.textFile("hdfs://10.56.2.193:54310/hw2-input/")
+# use csv reader to split each line of file into a list of elements.
+# this will automatically split the csv data correctly.
+rdd = rdd.mapPartitions(lambda x: reader(x))
+
+# using filter with column condition (crimes in month of july)
+for i in rdd.select("OFNS_DESC"):
+    rdd = rdd.filter(rdd.RPT_DT == "july")
+
+# perform sum all the int values for each unique keys
+
+rdd = rdd.reduceByKey(lambda x, y: x + y)
+
+#function grab top 3
+rdd = rdd.map(lambda x: (x[1], x[0])).sortByKey(False).take(3)
+
+#print out
+print("Top 3 crime types that were reported in the month of July are:")
+
+#How many crimes of type DANGEROUS WEAPONS were reported in the month of July ?
+rdd_count = rdd.filter(rdd.RPT_DT == "july" and rdd.OFNS_DESC == "DANGEROUS WEAPONS")
+rdd_count.count()
